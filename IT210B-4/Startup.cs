@@ -36,12 +36,18 @@ namespace IT210B_4
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            services.AddAuthentication().AddGoogle(options =>
-            {
-                IConfigurationSection googleAuthSection = Configuration.GetSection("Authentication:Google");
-                options.ClientId = googleAuthSection["ClientId"];
-                options.ClientSecret = googleAuthSection["ClientSecret"];
-            });
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    IConfigurationSection googleAuthSection = Configuration.GetSection("Authentication:Google");
+                    options.ClientId = googleAuthSection["ClientId"];
+                    options.ClientSecret = googleAuthSection["ClientSecret"];
+                })
+                .AddMicrosoftAccount(microsoftOptions =>
+                {
+                    microsoftOptions.ClientId = Configuration["Authentication:Microsoft:ClientId"];
+                    microsoftOptions.ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"];
+                });
 
             services.Configure<AtlasSettings>(Configuration.GetSection(nameof(AtlasSettings)));
             services.AddSingleton<IAtlasSettings>(sp =>

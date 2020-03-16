@@ -22,7 +22,7 @@ namespace IT210B_4.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "ItemsController");
         }
 
         public IActionResult Privacy()

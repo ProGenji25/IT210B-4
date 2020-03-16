@@ -15,6 +15,6 @@ namespace IT210B_4.Models
         public string UserId { get; set; }
         public string Text { get; set; }
         public bool Done { get; set; } = false;
-        public BsonDateTime Date { get; set; }
+        public DateTime Date { get; set; }
     }
 }
